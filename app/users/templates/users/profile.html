@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Профіль</h2>
+<p>Привіт, {{ username }}!</p>
+
+<form method="POST">
+    <button name="action" value="logout">Вийти</button>
+</form>
+
+<h3>Кукі</h3>
+<form method="POST">
+    <label>Ключ:</label>
+    <input type="text" name="key">
+    <label>Значення:</label>
+    <input type="text" name="value">
+    <label>Час дії (сек):</label>
+    <input type="number" name="max_age" value="3600">
+    <button name="action" value="add_cookie">Додати кукі</button>
+</form>
+
+<form method="POST">
+    <label>Ключ для видалення:</label>
+    <input type="text" name="key">
+    <button name="action" value="delete_cookie">Видалити</button>
+</form>
+
+<h3>Кольорова схема</h3>
+<a href="{{ url_for('users.change_color', color='light') }}">Світла</a>
+<a href="{{ url_for('users.change_color', color='dark') }}">Темна</a>
+
+<h3>Поточні кукі</h3>
+<table>
+    <tr><th>Ключ</th><th>Значення</th></tr>
+    {% for key, value in cookies %}
+    <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

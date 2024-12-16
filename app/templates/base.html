@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask App</title>
+</head>
+<body class="{{ request.cookies.get('color_scheme', 'light') }}">
+    <nav>
+        <a href="{{ url_for('users.login') }}">Вхід</a>
+        <a href="{{ url_for('users.profile') }}">Профіль</a>
+    </nav>
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+        <ul>
+        {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+</body>
+</html>
